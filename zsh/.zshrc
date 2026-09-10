@@ -18,3 +18,6 @@ setopt HIST_IGNORE_ALL_DUPS # drop any older duplicate elsewhere in history, kee
 setopt HIST_EXPIRE_DUPS_FIRST # drop duplicate commands first (when reaching history's limit)
 setopt HIST_SAVE_NO_DUPS # don't write duplicate entries to the history file
 setopt HIST_FIND_NO_DUPS # skip duplicates while cycling through history
+
+bindkey -v # use vi-style keybindings for command-line editing
+export KEYTIMEOUT=1 # wait 10ms after Esc before acting on it (default 40 == 400ms)
