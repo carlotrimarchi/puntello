@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+src_dir=~/.local/src/neovim
+install_prefix=~/.local
+
+set -euo pipefail
+
+xcode-select -p &> /dev/null || xcode-select --install
+
+brew install ninja cmake gettext curl
+
+if [[ ! -d "$src_dir" ]]; then
+  git clone https://github.com/neovim/neovim.git "$src_dir"
+fi
+
+cd "$src_dir"
+git pull
+make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="$install_prefix" \
+     CMAKE_EXTRA_FLAGS="-DCMAKE_C_FLAGS=-I$src_dir/.deps/usr/include"
+make install
